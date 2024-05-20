@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	public Rigidbody PlayerRb;
 	private int score = 0;
 	public int health = 5;
+	public Text scoreText;
+	
 	// Use this for initialization
 	void Start () {
 
@@ -43,8 +46,9 @@ public class PlayerController : MonoBehaviour {
 		if (other.CompareTag("Pickup"))
         {
 			score ++;
-            Debug.Log("Score: " + score);
+            //Debug.Log("Score: " + score);
 			Destroy(other.gameObject);
+			SetScoreText();
         }
 		if (other.CompareTag("Trap")) {
 			health --;
@@ -53,5 +57,10 @@ public class PlayerController : MonoBehaviour {
 		if (other.CompareTag("Goal")) {
 			Debug.Log("You win!") ;
 		}
+	}
+
+	void SetScoreText()
+	{
+		scoreText.text = "Score: " + score;
 	}
 }
